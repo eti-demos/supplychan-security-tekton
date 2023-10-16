@@ -127,7 +127,12 @@ The script
   and a pipeline
   [`buildpacks-pipeline`](https://hub.tekton.dev/tekton/pipeline/buildpacks) into Tekton pipeline.
   [demo ref](https://youtu.be/EHZA_kMHmYE?t=1034)
+- Installs
+  [`cosign`](https://github.com/tektoncd/chains/blob/main/docs/config.md)
+  command to using sigstore project solution. 
 - Generate signingkey with [`cosign`](https://github.com/tektoncd/chains/blob/main/docs/config.md)
+- Installs [`crane`](https://github.com/google/go-containerregistry) command to
+  interact with container registries.
 - deploys tekton dashboard for better UI. 
 - installs tekton CLI `tkn`
 

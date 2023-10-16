@@ -47,7 +47,6 @@ wait_pod_ns "tekton-chains"
 newline
 
 # Patch configuration of Tekton chain
-# config doc https://github.com/tektoncd/chains/blob/main/docs/config.md
 console_log "Patch configuration of Tekton chain"
 kubectl patch configmap chains-config -n tekton-chains -p='{"data":{"artifacts.taskrun.format": "in-toto"}}'
 kubectl patch configmap chains-config -n tekton-chains -p='{"data":{"artifacts.taskrun.storage": "oci, tekton"}}'
@@ -70,11 +69,38 @@ console_log "Waiting Pods ready for Tekton dashboard"
 wait_pod_ns "tekton-pipelines"
 newline
 
-# Installing cosign command
-# TODO install different version based on the OS
-# https://docs.sigstore.dev/system_config/installation/
+# Installing cosign, crane command
 console_log "Installing cosign command"
-brew install cosign
+if [[ $(uname) == "Darwin" ]]; then
+    brew install cosign
+elif [[$(uname) == "Linux"]]; then
+    curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
+    sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+    sudo chmod +x /usr/local/bin/cosign
+fi
+newline
+
+# Install crane
+console_log "Installing crane command"
+if [[ $(uname) == "Darwin" ]]; then
+    brew install crane
+elif [[$(uname) == "Linux"]]; then
+    VERSION=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
+    ARCH=amd64
+    OS=Linux
+    curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
+    sudo tar -zxvf go-containerregistry.tar.gz -C /usr/local/bin/ crane
+fi
+newline
+
+# Install tkn
+console_log "Installing tkn command"
+if [[ $(uname) == "Darwin" ]]; then
+    brew install tektoncd-cli
+elif [[$(uname) == "Linux"]]; then
+    curl -LO https://github.com/tektoncd/cli/releases/download/v0.32.0/tektoncd-cli-0.32.0_Linux-64bit.deb
+    sudo dpkg -i ./tektoncd-cli-0.32.0_Linux-64bit.deb
+fi
 newline
 
 # Create siging key with `cosign`
