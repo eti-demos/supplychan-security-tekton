@@ -51,6 +51,7 @@ newline
 console_log "Patch configuration of Tekton chain"
 kubectl patch configmap chains-config -n tekton-chains -p='{"data":{"artifacts.taskrun.format": "in-toto"}}'
 kubectl patch configmap chains-config -n tekton-chains -p='{"data":{"artifacts.taskrun.storage": "oci, tekton"}}'
+kubectl patch configmap chains-config -n tekton-chains -p='{"data":{"transparency.enabled": "true"}}'
 newline
 
 # Deploying  CI/CD pipeline - Buildpacks
