@@ -111,6 +111,7 @@ enable the feature by following the instruction but I couldn't manage to do it.
 ```bash
 ./setup.sh
 ```
+
 The script
 - deploys  [tekton pipeline](https://tekton.dev/docs/installation/pipelines/)
   and [tekton chain](https://tekton.dev/docs/chains/#installation) in the
@@ -142,6 +143,9 @@ One can check the loaded tasks and pipelines with the command `tkn`.
 
 ```bash
 tkn task ls
+```
+
+```console
 NAME                DESCRIPTION              AGE
 buildpacks          The Buildpacks task...   2 hours ago
 buildpacks-phases   The Buildpacks-Phas...   2 hours ago
@@ -150,6 +154,8 @@ git-clone           These Tasks are Git...   2 hours ago
 
 ```bash
 tkn pipeline ls
+```
+``` console
 NAME                   AGE              LAST RUN   STARTED   DURATION   STATUS
 buildpacks-pipeline    22 seconds ago   ---        ---       ---        ---
 ```

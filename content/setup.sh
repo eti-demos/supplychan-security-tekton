@@ -1,11 +1,11 @@
-#! /bin/sh 
+#! /bin/bash
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 function console_log (){
-    echo  "${GREEN}===$1====${NC}"
+    echo -e "${GREEN}===$1====${NC}"
 }
 
 function create_k8s_cluster(){ 
@@ -73,7 +73,7 @@ newline
 console_log "Installing cosign command"
 if [[ $(uname) == "Darwin" ]]; then
     brew install cosign
-elif [[$(uname) == "Linux"]]; then
+elif [[ $(uname) == "Linux" ]]; then
     curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
     sudo mv cosign-linux-amd64 /usr/local/bin/cosign
     sudo chmod +x /usr/local/bin/cosign
@@ -84,7 +84,7 @@ newline
 console_log "Installing crane command"
 if [[ $(uname) == "Darwin" ]]; then
     brew install crane
-elif [[$(uname) == "Linux"]]; then
+elif [[ $(uname) == "Linux" ]]; then
     VERSION=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
     ARCH=amd64
     OS=Linux
@@ -97,7 +97,7 @@ newline
 console_log "Installing tkn command"
 if [[ $(uname) == "Darwin" ]]; then
     brew install tektoncd-cli
-elif [[$(uname) == "Linux"]]; then
+elif [[ $(uname) == "Linux" ]]; then
     curl -LO https://github.com/tektoncd/cli/releases/download/v0.32.0/tektoncd-cli-0.32.0_Linux-64bit.deb
     sudo dpkg -i ./tektoncd-cli-0.32.0_Linux-64bit.deb
 fi
@@ -111,12 +111,12 @@ newline
 
 # The final info words
 console_log "[INFO]"
-echo "The signing key is store as a secret object ${GREEN}'signing-secrets'${NC} in namespace tekton chains in k8s cluster"
-echo "The related public is written to local file called ${GREEN}'cosign.pub'${NC}"
+echo -e "The signing key is store as a secret object ${GREEN}'signing-secrets'${NC} in namespace tekton chains in k8s cluster"
+echo -e "The related public is written to local file called ${GREEN}'cosign.pub'${NC}"
 newline
 echo "The deploymenet is finished, you can now access to the dashboard of Tekton after exposing the tekton daseboard endpoint via the follong command"
 newline
-echo "\t kubectl port-forward -n tekton-pipelines service/tekton-dashboard 9097:9097"
+echo -e "\t kubectl port-forward -n tekton-pipelines service/tekton-dashboard 9097:9097"
 newline
 
 
