@@ -85,11 +85,8 @@ console_log "Installing crane command"
 if [[ $(uname) == "Darwin" ]]; then
     brew install crane
 elif [[ $(uname) == "Linux" ]]; then
-    VERSION=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
-    ARCH=amd64
-    OS=Linux
-    curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
-    sudo tar -zxvf go-containerregistry.tar.gz -C /usr/local/bin/ crane
+    curl -OL "https://github.com/google/go-containerregistry/releases/download/v0.16.1/go-containerregistry_Linux_arm64.tar.gz" 
+    sudo tar -zxvf go-containerregistry_Linux_arm64.tar.gz -C /usr/local/bin/ crane
 fi
 newline
 
@@ -118,5 +115,3 @@ echo "The deploymenet is finished, you can now access to the dashboard of Tekton
 newline
 echo -e "\t kubectl port-forward -n tekton-pipelines service/tekton-dashboard 9097:9097"
 newline
-
-

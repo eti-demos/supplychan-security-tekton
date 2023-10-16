@@ -113,15 +113,16 @@ enable the feature by following the instruction but I couldn't manage to do it.
 ```
 
 The script
+
 - deploys  [tekton pipeline](https://tekton.dev/docs/installation/pipelines/)
   and [tekton chain](https://tekton.dev/docs/chains/#installation) in the
   kubernetes cluster. 
 - configures Tekton Chain. [doc](https://github.com/tektoncd/chains/blob/main/docs/config.md)
-```    
-"artifacts.taskrun.format": "in-toto"
-"artifacts.taskrun.storage": "oci, tekton"
-"transparency.enabled": "true"
-```
+    ```    
+    "artifacts.taskrun.format": "in-toto"
+    "artifacts.taskrun.storage": "oci, tekton"
+    "transparency.enabled": "true"
+    ```
 - load 3 tasks [`git-clone`](https://hub.tekton.dev/tekton/Task/git-clone/0.9),
   [`buildpacks`](https://hub.tekton.dev/tekton/Task/buildpacks/0.5) and
   [`buildpacks-phases`](https://hub.tekton.dev/tekton/Task/buildpacks-phases/0.2)
