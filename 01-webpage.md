@@ -109,7 +109,7 @@ enable the feature by following the instruction but I couldn't manage to do it.
 
 ### Setup
 ```bash
-$ ./setup.sh
+./setup.sh
 ```
 The script
 - deploys  [tekton pipeline](https://tekton.dev/docs/installation/pipelines/)
@@ -141,7 +141,7 @@ The script
 One can check the loaded tasks and pipelines with the command `tkn`.
 
 ```bash
-$ tkn task ls
+tkn task ls
 NAME                DESCRIPTION              AGE
 buildpacks          The Buildpacks task...   2 hours ago
 buildpacks-phases   The Buildpacks-Phas...   2 hours ago
@@ -149,7 +149,7 @@ git-clone           These Tasks are Git...   2 hours ago
 ```
 
 ```bash
-$ tkn pipeline ls
+tkn pipeline ls
 NAME                   AGE              LAST RUN   STARTED   DURATION   STATUS
 buildpacks-pipeline    22 seconds ago   ---        ---       ---        ---
 ```
@@ -163,13 +163,13 @@ private key stored as `signing-secrets` secret in `tekton-chains` namespace push
 to `ttl.sh/tekton-test:1h`
 
 ```bash
-$ kubectl create -f run-buildpacks.yaml
+kubectl create -f run-buildpacks.yaml
 ```
 
 After waiting for a while, we can check the execution result with 
 
 ```bash
-$ tkn pipelinerun describe --last
+tkn pipelinerun describe --last
 ```
 ```console
 Name:              buildpacks-pipelinerun-spvj6
@@ -241,7 +241,7 @@ changed for each execution. I don't know how to makes it more convenient.
 ### Verification
 Verifying the signature:
 ```bash
-$ cosign verify --key k8s://tekton-chains/signing-secrets tt l.sh/tekton-test:1h
+cosign verify --key k8s://tekton-chains/signing-secrets ttl.sh/tekton-test:1h
 ```
 
 ```console
@@ -257,7 +257,7 @@ The following checks were performed on each of these signatures:
 
 Verifying the attestation:
 ```bash
-$ cosign verify-attestation --key k8s://tekton-chains/signing-secrets \
+cosign verify-attestation --key k8s://tekton-chains/signing-secrets \
 --type slsaprovenance ttl.sh/tekton-test:1h
 ```
 ``` console
@@ -271,7 +271,7 @@ The following checks were performed on each of these signatures:
 
 The following command will show the content of provenance. 
 ```bash
-$ cosign verify-attestation --key k8s://tekton-chains/signing-secrets \
+cosign verify-attestation --key k8s://tekton-chains/signing-secrets \
                   --type slsaprovenance ttl.sh/tekton-test:1h | \
                   jq '.payload'   | tr -d '"' | base64 -d  | jq .
 ```
