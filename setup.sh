@@ -56,7 +56,7 @@ newline
 # Deploying  CI/CD pipeline - Buildpacks
 console_log "Deploying  CI/CD pipeline - Buildpacks"
 kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/task/git-clone/0.9/raw
-kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/task/buildpacks/0.6/raw
+kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/task/buildpacks/0.5/raw
 kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/task/buildpacks-phases/0.2/raw
 kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/pipeline/buildpacks/0.2/raw
 newline
