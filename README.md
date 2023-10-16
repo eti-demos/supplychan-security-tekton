@@ -133,6 +133,7 @@ The script
 - Generate signingkey with [`cosign`](https://github.com/tektoncd/chains/blob/main/docs/config.md)
 - Installs [`crane`](https://github.com/google/go-containerregistry) command to
   interact with container registries.
+- Generate signingkey with [`cosign`](https://github.com/tektoncd/chains/blob/main/docs/config.md)
 - deploys tekton dashboard for better UI. 
 - installs tekton CLI `tkn`
 
