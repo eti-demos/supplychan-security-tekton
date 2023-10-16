@@ -25,7 +25,7 @@ spec:
     - name: TRUST_BUILDER
       value: "true"
     - name: APP_IMAGE
-      value: "ttl.sh/demo:1h" # <- changed here
+      value: "ttl.sh/tekton-test:1h" # <- changed here
     # - name: SOURCE_URL
     #   value: https://github.com/buildpacks/samples
     # - name: SOURCE_SUBPATH
