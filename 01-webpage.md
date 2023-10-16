@@ -161,6 +161,14 @@ NAME                   AGE              LAST RUN   STARTED   DURATION   STATUS
 buildpacks-pipeline    22 seconds ago   ---        ---       ---        ---
 ```
 
+### Tekton dashboard
+After running the following command, one can open [Tekton
+dashbaord](https://location.hostname:8443/). 
+```bash
+kubectl port-forward -n tekton-pipelines service/tekton-dashboard 9097:9097
+```
+
+
 ### Building artifacts with provenance 
 
 The following command is going to clone a sample [docker container source
